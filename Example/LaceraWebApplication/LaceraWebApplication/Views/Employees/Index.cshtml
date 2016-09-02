@@ -1,0 +1,71 @@
+﻿@model IEnumerable <ClassLibrary.Models.Employee>
+
+
+@{
+}
+
+<h2>Employees</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            Name
+        </th>
+        <th>
+           Birthdate 
+        </th>
+        <th>
+           Salary
+        </th>
+        <th>
+            Hired Date
+        </th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @if(@item.Birthdate.HasValue)
+                {
+                    @Html.Label(item.Birthdate.Value.Month.ToString(), new { style="font-weight:normal"})
+                    @Html.Label("/", new { style = "font-weight:normal" })
+                    @Html.Label(item.Birthdate.Value.Day.ToString(), new { style = "font-weight:normal" })
+                    @Html.Label("/", new { style = "font-weight:normal" })
+                    @Html.Label(item.Birthdate.Value.Year.ToString(), new { style = "font-weight:normal" })
+                }
+                else
+                {
+                    @Html.Label("Invalid Birthdate", new { style = "font-weight:normal" });
+                }
+            </td>
+            <td>
+                @if (item.Salary.HasValue)
+                {
+                    @Html.Label("$", new { style = "font-weight:normal" });
+                    @Html.DisplayFor(modelItem => item.Salary)
+                }
+                else
+                {
+                    @Html.Label("Invalid Salary",  new { style = "font-weight:normal" });
+                }
+            </td>
+            <td>
+                @if (@item.HiredDate.HasValue)
+                {
+                    @Html.Label(item.HiredDate.Value.Month.ToString(), new { style = "font-weight:normal" })
+                    @Html.Label("/", new { style = "font-weight:normal" })
+                    @Html.Label(item.HiredDate.Value.Day.ToString(), new { style = "font-weight:normal" })
+                    @Html.Label("/", new { style = "font-weight:normal" })
+                    @Html.Label(item.HiredDate.Value.Year.ToString(), new { style = "font-weight:normal" })
+                }
+                else
+                {
+                    @Html.Label("Invalid Hire Date", new { style = "font-weight:normal" });
+                }
+            </td>
+        </tr>
+    }
